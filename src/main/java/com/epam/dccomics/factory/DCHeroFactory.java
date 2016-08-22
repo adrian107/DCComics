@@ -29,22 +29,19 @@ public class DCHeroFactory {
 	}
 	
 	public static Arrow getArrowInstance(final String dcHeroName) {
-		Arrow arrow = new Arrow();
-		arrow.setName(dcHeroName);
+		Arrow arrow = new Arrow(dcHeroName);
 		arrow.setGoodGuy(GoodGuy.GOOD_GUY);
 		return arrow;
 	}
 	
 	public static Superman getSupermanInstance(final String dcHeroName) {
-		Superman superman = new Superman();
-		superman.setName(dcHeroName);
+		Superman superman = new Superman(dcHeroName);
 		superman.setGoodGuy(GoodGuy.GOOD_GUY);
 		return superman;
 	}
 	
 	public static Batman getBatmanInstance(final String dcHeroName) {
-		Batman batman= new Batman();
-		batman.setName(dcHeroName);
+		Batman batman= new Batman(dcHeroName);
 		batman.setGoodGuy(GoodGuy.GOOD_GUY);
 		return batman;
 	}

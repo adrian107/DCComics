@@ -4,6 +4,10 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Arrow extends DCHero {
 		
+	public Arrow(final String name) {
+		super(name);
+	}
+
 	public void setName(final String name) {
 		this.name = name;
 	}

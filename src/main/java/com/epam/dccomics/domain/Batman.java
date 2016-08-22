@@ -4,6 +4,10 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Batman extends DCHero {
 
+	public Batman(final String name) {
+		super(name);
+	}
+
 	private Batmobil batmobil;
 
 	public void setName(final String name) {

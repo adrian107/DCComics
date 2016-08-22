@@ -24,7 +24,7 @@
 
 	<bean id="prototypeDCHero" class="com.epam.dccomics.domain.PrototypeDCHero"
 		scope="prototype">
-		<property name="name" value="prototypeDCHero"></property>
+		<constructor-arg name="name" value="prototypeDCHero"></constructor-arg>
 		<property name="goodGuy" value="#{ T(com.epam.dccomics.domain.GoodGuy).GOOD_GUY }"></property>
 	</bean>
 	
@@ -32,9 +32,11 @@
 		<constructor-arg name="name" value="batmobilGun1"></constructor-arg>
 	</bean>
 	
-	<bean id="batmobil" class="com.epam.dccomics.domain.Batmobil">
-		<constructor-arg name="name" value="batmobil"></constructor-arg>
-		<constructor-arg name="gun" ref="batmobilGun"></constructor-arg>
-	</bean>
+<!-- 	<bean id="batmobil" class="com.epam.dccomics.domain.Batmobil"> -->
+<!-- 		<constructor-arg name="name" value="batmobil"></constructor-arg> -->
+<!-- 		<constructor-arg name="gun" ref="batmobilGun"></constructor-arg> -->
+<!-- 	</bean> -->
+
+	<import resource="beans_dc_heroes.xml"/>
 
 </beans>
