@@ -2,24 +2,21 @@ package com.epam.dccomics.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class Arrow extends DCHero {
-		
-	public void setName(final String name) {
-		this.name = name;
+public class Batmobil extends Vehicle {
+
+	private Gun gun;
+	
+	public Batmobil(String name, Gun gun) {
+		super(name);
+		this.gun = gun;
 	}
 
-	public void setGoodGuy(final GoodGuy goodGuy) {
-		this.goodGuy = goodGuy;
+	public Gun getGun() {
+		return gun;
 	}
 
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public GoodGuy getGoodGuy() {
-		return this.goodGuy;
+	public void setGun(Gun gun) {
+		this.gun = gun;
 	}
 
 	@Override
@@ -31,8 +28,10 @@ public class Arrow extends DCHero {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
 		sb = new StringBuilder(sb.substring(idx, sb.length()));
-		String str = "Arrow " + sb.toString();
+		String str = "Batmobil " + sb.toString();
 		return str;
 	}
+	
 
+	
 }

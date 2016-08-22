@@ -1,5 +1,7 @@
 package com.epam.dccomics.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class Superman extends DCHero {
 
 	public void setName(String name) {
@@ -7,7 +9,7 @@ public class Superman extends DCHero {
 	}
 
 	public void setGoodGuy(final GoodGuy goodGuy) {
-		this.goodguy = goodGuy;
+		this.goodGuy = goodGuy;
 	}
 
 	@Override
@@ -17,12 +19,20 @@ public class Superman extends DCHero {
 
 	@Override
 	public GoodGuy getGoodGuy() {
-		return this.goodguy;
+		return this.goodGuy;
 	}
 
 	@Override
 	public String toString() {
-		return "Superman [name=" + name + ", goodguy=" + goodguy + "]";
+		return myToString();
+	}
+	
+	private String myToString() {
+		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
+		final int idx = sb.indexOf("[");
+		sb = new StringBuilder(sb.substring(idx, sb.length()));
+		String str = "Superman " + sb.toString();
+		return str;
 	}
 
 }

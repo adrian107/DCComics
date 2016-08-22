@@ -4,7 +4,7 @@ public abstract class DCHero {
 
 	protected String name;
 	
-	protected GoodGuy goodguy;
+	protected GoodGuy goodGuy;
 	
 	public abstract String getName();
 	
