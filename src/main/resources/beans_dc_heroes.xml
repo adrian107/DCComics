@@ -5,10 +5,46 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+	<bean id="theGreenArrow" class="com.epam.dccomics.factory.DCHeroFactory"
+		factory-method="getArrowInstance">
+		<constructor-arg value="theGreenArrow"></constructor-arg>
+	</bean>
+
+	<bean id="superman" class="com.epam.dccomics.factory.DCHeroFactory"
+		factory-method="getSupermanInstance">
+		<constructor-arg value="superman"></constructor-arg>
+	</bean>
+
+	<bean id="batman" class="com.epam.dccomics.factory.DCHeroFactory"
+		factory-method="getBatmanInstance">
+		<constructor-arg value="batman"></constructor-arg>
+		<property name="batmobil" ref="batmobil"></property>
+	</bean>
+
+	<bean id="lexLutor" class="com.epam.dccomics.factory.DCHeroFactory"
+		factory-method="getLexLutorInstance">
+		<constructor-arg value="lexLutor"></constructor-arg>
+		<property name="vehicle" ref="limousine1"></property>
+	</bean>
+
+	<bean id="prototypeDCHero" class="com.epam.dccomics.domain.PrototypeDCHero"
+		scope="prototype">
+		<constructor-arg name="name" value="prototypeDCHero"></constructor-arg>
+		<property name="goodGuy"
+			value="#{ T(com.epam.dccomics.domain.GoodGuy).BAD_GUY }"></property>
+	</bean>
+
+	<bean id="batmobilGun" class="com.epam.dccomics.domain.Gun">
+		<constructor-arg name="name" value="batmobilGun1"></constructor-arg>
+	</bean>
 
 	<bean id="batmobil" class="com.epam.dccomics.domain.Batmobil">
 		<constructor-arg name="name" value="batmobil"></constructor-arg>
 		<constructor-arg name="gun" ref="batmobilGun"></constructor-arg>
+	</bean>
+
+	<bean id="limousine1" class="com.epam.dccomics.domain.Limousine">
+		<constructor-arg name="name" value="limousine1"></constructor-arg>
 	</bean>
 
 </beans>

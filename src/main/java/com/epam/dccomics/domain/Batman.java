@@ -1,17 +1,26 @@
 package com.epam.dccomics.domain;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 
 public class Batman extends DCHero {
+
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(Batman.class);
+
+	private Batmobil batmobil;
 
 	public Batman(final String name) {
 		super(name);
 	}
-
-	private Batmobil batmobil;
-
-	public void setName(final String name) {
-		this.name = name;
+	
+	@PostConstruct
+	public void init() {
+		logger.debug("{} is created", getName());
+		this.lifePower = 100;
 	}
 
 	public void setGoodGuy(final GoodGuy goodGuy) {
@@ -24,16 +33,6 @@ public class Batman extends DCHero {
 
 	public void setBatmobil(Batmobil batmobil) {
 		this.batmobil = batmobil;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public GoodGuy getGoodGuy() {
-		return this.goodGuy;
 	}
 
 	@Override

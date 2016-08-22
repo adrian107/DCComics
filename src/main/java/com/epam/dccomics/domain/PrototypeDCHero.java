@@ -1,15 +1,24 @@
 package com.epam.dccomics.domain;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 
 public class PrototypeDCHero extends DCHero {
+
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(PrototypeDCHero.class);
 
 	public PrototypeDCHero(final String name) {
 		super(name);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@PostConstruct
+	public void init() {
+		logger.debug("{} is created", getName());
+		this.lifePower = 100;
 	}
 
 	public void setGoodGuy(final GoodGuy goodGuy) {
@@ -17,20 +26,10 @@ public class PrototypeDCHero extends DCHero {
 	}
 
 	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public GoodGuy getGoodGuy() {
-		return this.goodGuy;
-	}
-
-	@Override
 	public String toString() {
 		return myToString();
 	}
-	
+
 	private String myToString() {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
