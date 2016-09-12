@@ -20,7 +20,8 @@ public class Superman extends DCHero {
 	@PostConstruct
 	public void init() {
 		logger.debug("{} is created", getName());
-		this.lifePower = Constant.DCHERO_LIFE_POWER;
+		this.lifePower = Constant.LIFE_POWER;
+		this.ability = Constant.ABILITY_SUPERMAN;
 	}
 
 	@Override

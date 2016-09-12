@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.epam.dccomics.constant.Constant;
 
 import ch.qos.logback.classic.Logger;
+import ch.qos.logback.core.pattern.color.ANSIConstants;
 
 public class Batman extends DCHero {
 
@@ -22,7 +23,8 @@ public class Batman extends DCHero {
 	@PostConstruct
 	public void init() {
 		logger.debug("{} is created", getName());
-		this.lifePower = Constant.DCHERO_LIFE_POWER;
+		this.lifePower = Constant.LIFE_POWER;
+		this.ability = Constant.ABILITY_BATMAN;
 	}
 
 	

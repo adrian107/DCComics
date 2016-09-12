@@ -1,6 +1,6 @@
 package com.epam.dccomics.domain;
 
-public interface Ability {
+public interface FightAbility {
 
 	public void fight();
 	

@@ -27,7 +27,7 @@ public class App {
 		ctx.registerShutdownHook();
 
 		DCWorld dcWorld = ctx.getBean("dcWorld", DCWorld.class);
-		dcWorld.createDCHeroes(ctx);
+		dcWorld.dCWorld(ctx);
 	}
 
 }

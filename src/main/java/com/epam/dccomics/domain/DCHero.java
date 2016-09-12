@@ -8,6 +8,8 @@ public abstract class DCHero {
 
 	protected double lifePower;
 
+	protected int ability;
+	
 	protected GoodGuy goodGuy;
 
 	public DCHero(final String name) {
@@ -16,6 +18,10 @@ public abstract class DCHero {
 
 	public void setLifePower(double lifePower) {
 		this.lifePower = lifePower;
+	}
+	
+	public double getLifePower() {
+		return lifePower;
 	}
 	
 	public String getName() {

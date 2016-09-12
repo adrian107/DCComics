@@ -4,7 +4,10 @@
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd"
-		default-lazy-init="true">
+	default-lazy-init="true">
+
+	<!-- ****************************************** -->
+	<!-- CREATE Heroes START -->
 
 	<bean id="theGreenArrow" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getArrowInstance">
@@ -27,7 +30,7 @@
 		<constructor-arg value="LexLutor"></constructor-arg>
 		<property name="limousine" ref="limousine1"></property>
 	</bean>
-	
+
 	<bean id="zoom" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getZoomInstance">
 		<constructor-arg value="Zoom"></constructor-arg>
@@ -39,6 +42,13 @@
 		<property name="goodGuy"
 			value="#{ T(com.epam.dccomics.domain.GoodGuy).BAD_GUY }"></property>
 	</bean>
+
+	<!-- CREATE Heroes end -->
+	<!-- ****************************************** -->
+
+
+	<!-- ****************************************** -->
+	<!-- CREATE Weapons and Vehicles START -->
 
 	<bean id="batmobilGun" class="com.epam.dccomics.domain.Gun">
 		<constructor-arg name="name" value="batmobilGun1"></constructor-arg>
@@ -53,4 +63,6 @@
 		<constructor-arg name="name" value="limousine1"></constructor-arg>
 	</bean>
 
+	<!-- CREATE Weapons and Vehicles END -->
+	<!-- ****************************************** -->
 </beans>

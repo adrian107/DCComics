@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.LoggerFactory;
 
+import com.epam.dccomics.constant.Constant;
+
 import ch.qos.logback.classic.Logger;
 
 public class PrototypeDCHero extends DCHero {
@@ -16,6 +18,7 @@ public class PrototypeDCHero extends DCHero {
 	public PrototypeDCHero(final String name) {
 		super(name + "_" + ID);
 		ID++;
+		this.ability = (int)(Math.random() * 5) + 1;
 	}
 
 	@PostConstruct

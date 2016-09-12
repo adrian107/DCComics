@@ -14,6 +14,7 @@ public class DCWorld {
 	private static Logger logger = (Logger) LoggerFactory.getLogger(DCWorld.class);
 
 	public DCWorld() {
+		
 	}
 
 	@PostConstruct
@@ -22,11 +23,19 @@ public class DCWorld {
 		logger.debug("------------------");
 	}
 
-	public void createDCHeroes(final ApplicationContext ctx) {
+	public void dCWorld(final ApplicationContext ctx) {
+		createDcHeroes(ctx);
+		createSomeBattle();
+	}
+	
+	
+	public void createDcHeroes(final ApplicationContext ctx) {
 		TheGreenArrow arrow = ctx.getBean("theGreenArrow", TheGreenArrow.class);
 		Superman superman = ctx.getBean("superman", Superman.class);
 		Batman batman = ctx.getBean("batman", Batman.class);
 		PrototypeDCHero prototypeDCHero = ctx.getBean("prototypeDCHero", PrototypeDCHero.class);
+		PrototypeDCHero prototypeDCHero2 = ctx.getBean("prototypeDCHero", PrototypeDCHero.class);
+		PrototypeDCHero prototypeDCHero3 = ctx.getBean("prototypeDCHero", PrototypeDCHero.class);
 		Gun gun = ctx.getBean("batmobilGun", Gun.class);
 		Batmobil batmobil = ctx.getBean("batmobil", Batmobil.class);
 		LexLutor lexLutor = ctx.getBean("lexLutor", LexLutor.class);
@@ -37,13 +46,22 @@ public class DCWorld {
 		logger.debug(superman.toString());
 		logger.debug(batman.toString());
 		logger.debug(prototypeDCHero.toString());
+		logger.debug(prototypeDCHero2.toString());
+		logger.debug(prototypeDCHero3.toString());
 		logger.debug(gun.toString());
 		logger.debug(batmobil.toString());
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
+		
+
+		lexLutor.setLifePower(4);
+//		Battle battle1 = ctx.getBean("battle1", Battle.class);	// This cause IllegalArgumentException...
+		Battle battle2 = ctx.getBean("battle2", Battle.class);
+		Battle battle3 = ctx.getBean("battle3", Battle.class);
+
 	}
 	
-	private void fight() {
+	private void createSomeBattle() {
 		
 	}
 	
