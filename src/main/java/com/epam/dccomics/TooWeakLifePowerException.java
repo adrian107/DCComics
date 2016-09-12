@@ -1,6 +1,6 @@
 package com.epam.dccomics;
 
-public class TooWeakLifePowerException extends Exception {
+public class TooWeakLifePowerException extends RuntimeException {
 
 	private static final long serialVersionUID = 1912753363232807009L;
 

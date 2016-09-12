@@ -3,7 +3,8 @@ package com.epam.dccomics.constant;
 public class Constant {
 
 	public static final int LIFE_POWER = 100;
-	public static final int TOO_WEAK_LIFE_POWER = 10;
+	public static final int TOO_WEAK_LIFE_POWER = 25;
+	public static final int MEASURE_OF_INJURY = 20;
 	
 	public static final int VEHICLE_DAMAGE = 100;
 	

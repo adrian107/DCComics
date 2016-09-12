@@ -53,16 +53,24 @@ public class DCWorld {
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
 		
-
-		lexLutor.setLifePower(4);
-//		Battle battle1 = ctx.getBean("battle1", Battle.class);	// This cause IllegalArgumentException...
+		
+		FightingOpponentPair supermanAgainstBatman = ctx.getBean("supermanAgainstBatman", FightingOpponentPair.class);
+		FightingOpponentPair supermanAgainstLexLutor = ctx.getBean("supermanAgainstLexLutor", FightingOpponentPair.class);
+		FightingOpponentPair theGreenArrowAgainstZoom = ctx.getBean("theGreenArrowAgainstZoom", FightingOpponentPair.class);
+		
+		
+		// The following row cause IllegalArgumentException, because two "GoodGuy" can't fight against each other
+//		Battle battle1 = ctx.getBean("battle1", Battle.class);
 		Battle battle2 = ctx.getBean("battle2", Battle.class);
 		Battle battle3 = ctx.getBean("battle3", Battle.class);
 
+		
+		
 	}
 	
 	private void createSomeBattle() {
 		
 	}
+
 	
 }

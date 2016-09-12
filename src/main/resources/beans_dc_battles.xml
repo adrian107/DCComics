@@ -4,22 +4,43 @@
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd"
-		default-lazy-init="true">
+	default-lazy-init="true">
 
-
-	<bean id="battle1" class="com.epam.dccomics.domain.Battle" >
+	<!-- some FightingOpponentPair START -->
+	<!-- ************************************* -->
+	<bean id="supermanAgainstBatman" class="com.epam.dccomics.domain.FightingOpponentPair">
 		<constructor-arg name="goodGuyDcHero" ref="superman"></constructor-arg>
 		<constructor-arg name="badGuyDcHero" ref="batman"></constructor-arg>
 	</bean>
-	
-	<bean id="battle2" class="com.epam.dccomics.domain.Battle" >
+
+	<bean id="supermanAgainstLexLutor" class="com.epam.dccomics.domain.FightingOpponentPair">
 		<constructor-arg name="goodGuyDcHero" ref="superman"></constructor-arg>
 		<constructor-arg name="badGuyDcHero" ref="lexLutor"></constructor-arg>
 	</bean>
-	
-	<bean id="battle3" class="com.epam.dccomics.domain.Battle" >
+
+	<bean id="theGreenArrowAgainstZoom" class="com.epam.dccomics.domain.FightingOpponentPair">
 		<constructor-arg name="goodGuyDcHero" ref="theGreenArrow"></constructor-arg>
 		<constructor-arg name="badGuyDcHero" ref="zoom"></constructor-arg>
 	</bean>
+	<!-- ************************************* -->
+	<!-- some FightingOpponentPair END -->
+
+
+	<!-- some FightingOpponentPair START -->
+	<!-- ************************************* -->
+	<bean id="battle1" class="com.epam.dccomics.domain.Battle">
+		<constructor-arg name="fightingOpponentPair" ref="supermanAgainstBatman"></constructor-arg>
+	</bean>
+
+	<bean id="battle2" class="com.epam.dccomics.domain.Battle">
+		<constructor-arg name="fightingOpponentPair" ref="supermanAgainstLexLutor"></constructor-arg>
+	</bean>
+
+	<bean id="battle3" class="com.epam.dccomics.domain.Battle">
+		<constructor-arg name="fightingOpponentPair" ref="theGreenArrowAgainstZoom"></constructor-arg>
+	</bean>
+	<!-- ************************************* -->
+	<!-- some FightingOpponentPair END -->
+
 
 </beans>
