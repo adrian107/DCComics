@@ -1,13 +1,12 @@
 package com.epam.dccomics.factory;
 
-import javax.naming.OperationNotSupportedException;
-
-import com.epam.dccomics.domain.TheGreenArrow;
 import com.epam.dccomics.domain.Batman;
-import com.epam.dccomics.domain.DCHero;
 import com.epam.dccomics.domain.GoodGuy;
 import com.epam.dccomics.domain.LexLutor;
+import com.epam.dccomics.domain.Slade;
 import com.epam.dccomics.domain.Superman;
+import com.epam.dccomics.domain.TheGreenArrow;
+import com.epam.dccomics.domain.Zoom;
 
 public class DCHeroFactory {
 
@@ -52,5 +51,13 @@ public class DCHeroFactory {
 		lexLutor.setGoodGuy(GoodGuy.BAD_GUY);
 		return lexLutor;
 	}
+	
+	public static Zoom getZoomInstance(final String dcHeroName) {
+		Zoom zoom = new Zoom(dcHeroName);
+		zoom.setGoodGuy(GoodGuy.BAD_GUY);
+		return zoom;
+	}
+	
+	
 	
 }

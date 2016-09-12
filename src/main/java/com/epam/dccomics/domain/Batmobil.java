@@ -28,7 +28,7 @@ public class Batmobil extends Vehicle {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
 		sb = new StringBuilder(sb.substring(idx, sb.length()));
-		String str = "Batmobil " + sb.toString();
+		String str = getName() + " " + sb.toString();
 		return str;
 	}
 	

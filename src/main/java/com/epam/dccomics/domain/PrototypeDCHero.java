@@ -10,9 +10,12 @@ import ch.qos.logback.classic.Logger;
 public class PrototypeDCHero extends DCHero {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(PrototypeDCHero.class);
+	
+	private static int ID = 1;
 
 	public PrototypeDCHero(final String name) {
-		super(name);
+		super(name + "_" + ID);
+		ID++;
 	}
 
 	@PostConstruct
@@ -20,10 +23,7 @@ public class PrototypeDCHero extends DCHero {
 		logger.debug("{} is created", getName());
 		this.lifePower = 100;
 	}
-
-	public void setGoodGuy(final GoodGuy goodGuy) {
-		this.goodGuy = goodGuy;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -34,7 +34,7 @@ public class PrototypeDCHero extends DCHero {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
 		sb = new StringBuilder(sb.substring(idx, sb.length()));
-		String str = "PrototypeDCHero " + sb.toString();
+		String str = getName() + " " + sb.toString();
 		return str;
 	}
 

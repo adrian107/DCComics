@@ -3,33 +3,39 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+		default-lazy-init="true">
 
 	<bean id="theGreenArrow" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getArrowInstance">
-		<constructor-arg value="theGreenArrow"></constructor-arg>
+		<constructor-arg value="TheGreenArrow"></constructor-arg>
 	</bean>
 
 	<bean id="superman" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getSupermanInstance">
-		<constructor-arg value="superman"></constructor-arg>
+		<constructor-arg value="Superman"></constructor-arg>
 	</bean>
 
 	<bean id="batman" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getBatmanInstance">
-		<constructor-arg value="batman"></constructor-arg>
+		<constructor-arg value="Batman"></constructor-arg>
 		<property name="batmobil" ref="batmobil"></property>
 	</bean>
 
 	<bean id="lexLutor" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getLexLutorInstance">
-		<constructor-arg value="lexLutor"></constructor-arg>
-		<property name="vehicle" ref="limousine1"></property>
+		<constructor-arg value="LexLutor"></constructor-arg>
+		<property name="limousine" ref="limousine1"></property>
+	</bean>
+	
+	<bean id="zoom" class="com.epam.dccomics.factory.DCHeroFactory"
+		factory-method="getZoomInstance">
+		<constructor-arg value="Zoom"></constructor-arg>
 	</bean>
 
 	<bean id="prototypeDCHero" class="com.epam.dccomics.domain.PrototypeDCHero"
 		scope="prototype">
-		<constructor-arg name="name" value="prototypeDCHero"></constructor-arg>
+		<constructor-arg name="name" value="PrototypeDCHero"></constructor-arg>
 		<property name="goodGuy"
 			value="#{ T(com.epam.dccomics.domain.GoodGuy).BAD_GUY }"></property>
 	</bean>

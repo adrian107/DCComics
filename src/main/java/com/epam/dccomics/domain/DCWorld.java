@@ -22,7 +22,7 @@ public class DCWorld {
 		logger.debug("------------------");
 	}
 
-	public void openWorld(final ApplicationContext ctx) {
+	public void createDCHeroes(final ApplicationContext ctx) {
 		TheGreenArrow arrow = ctx.getBean("theGreenArrow", TheGreenArrow.class);
 		Superman superman = ctx.getBean("superman", Superman.class);
 		Batman batman = ctx.getBean("batman", Batman.class);
@@ -30,7 +30,9 @@ public class DCWorld {
 		Gun gun = ctx.getBean("batmobilGun", Gun.class);
 		Batmobil batmobil = ctx.getBean("batmobil", Batmobil.class);
 		LexLutor lexLutor = ctx.getBean("lexLutor", LexLutor.class);
-
+		Zoom zoom = ctx.getBean("zoom", Zoom.class);
+		
+		logger.debug("------------------");
 		logger.debug(arrow.toString());
 		logger.debug(superman.toString());
 		logger.debug(batman.toString());
@@ -38,6 +40,11 @@ public class DCWorld {
 		logger.debug(gun.toString());
 		logger.debug(batmobil.toString());
 		logger.debug(lexLutor.toString());
+		logger.debug(zoom.toString());
+	}
+	
+	private void fight() {
+		
 	}
 	
 }

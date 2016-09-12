@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.LoggerFactory;
 
+import com.epam.dccomics.constant.Constant;
+
 import ch.qos.logback.classic.Logger;
 
 public class Batman extends DCHero {
@@ -20,13 +22,10 @@ public class Batman extends DCHero {
 	@PostConstruct
 	public void init() {
 		logger.debug("{} is created", getName());
-		this.lifePower = 100;
+		this.lifePower = Constant.DCHERO_LIFE_POWER;
 	}
 
-	public void setGoodGuy(final GoodGuy goodGuy) {
-		this.goodGuy = goodGuy;
-	}
-
+	
 	public Batmobil getBatmobil() {
 		return batmobil;
 	}
@@ -44,7 +43,7 @@ public class Batman extends DCHero {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
 		sb = new StringBuilder(sb.substring(idx, sb.length()));
-		String str = "Batman " + sb.toString();
+		String str = getName() + " " + sb.toString();
 		return str;
 	}
 

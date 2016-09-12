@@ -22,17 +22,12 @@ public class App {
 	private static Logger logger = (Logger) LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) {
+
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans_dc_world.xml");
 		ctx.registerShutdownHook();
 
-		System.out.println(
-				"****************************************************************************************************************\n\n");
-
 		DCWorld dcWorld = ctx.getBean("dcWorld", DCWorld.class);
-		dcWorld.openWorld(ctx);
-
-		System.out.println(
-				"\n\n****************************************************************************************************************");
+		dcWorld.createDCHeroes(ctx);
 	}
 
 }

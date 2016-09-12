@@ -6,7 +6,6 @@ public class Limousine extends Vehicle {
 
 	public Limousine(String name) {
 		super(name);
-
 	}
 	
 	@Override
@@ -18,7 +17,7 @@ public class Limousine extends Vehicle {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
 		sb = new StringBuilder(sb.substring(idx, sb.length()));
-		String str = "Limousine " + sb.toString();
+		String str = getName() + " " + sb.toString();
 		return str;
 	}
 

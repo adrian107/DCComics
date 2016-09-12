@@ -25,5 +25,9 @@ public abstract class DCHero {
 	public GoodGuy getGoodGuy() {
 		return this.goodGuy;
 	}
+	
+	public void setGoodGuy(GoodGuy goodGuy) {
+		this.goodGuy = goodGuy;
+	}
 
 }

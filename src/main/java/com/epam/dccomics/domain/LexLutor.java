@@ -5,13 +5,15 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.LoggerFactory;
 
+import com.epam.dccomics.constant.Constant;
+
 import ch.qos.logback.classic.Logger;
 
 public class LexLutor extends DCHero {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(LexLutor.class);
 
-	private Vehicle vehicle;
+	private Limousine limousine;
 
 	public LexLutor(final String name) {
 		super(name);
@@ -20,19 +22,15 @@ public class LexLutor extends DCHero {
 	@PostConstruct
 	public void init() {
 		logger.debug("{} is created", getName());
-		this.lifePower = 100;
+		this.lifePower = Constant.DCHERO_LIFE_POWER;
 	}
 
-	public Vehicle getVehicle() {
-		return vehicle;
+	public Limousine getLimousine() {
+		return limousine;
 	}
 
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public void setGoodGuy(final GoodGuy goodGuy) {
-		this.goodGuy = goodGuy;
+	public void setLimousine(Limousine limousine) {
+		this.limousine = limousine;
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class LexLutor extends DCHero {
 		StringBuilder sb = new StringBuilder(ToStringBuilder.reflectionToString(this));
 		final int idx = sb.indexOf("[");
 		sb = new StringBuilder(sb.substring(idx, sb.length()));
-		String str = "LexLutor " + sb.toString();
+		String str = getName() + " " + sb.toString();
 		return str;
 	}
 
