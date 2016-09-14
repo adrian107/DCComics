@@ -1,20 +1,31 @@
 package com.epam.dccomics.domain;
 
 import java.applet.AppletContext;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 
 import ch.qos.logback.classic.Logger;
 
 public class DCWorld {
-	
+
 	private static Logger logger = (Logger) LoggerFactory.getLogger(DCWorld.class);
 
+	@Autowired
+	private MessageSource messageSource;
+
+	private Locale english;
+
+	// @Autowired
+	// private Locale locale;
+
 	public DCWorld() {
-		
+		english = Locale.ENGLISH;
 	}
 
 	@PostConstruct
@@ -27,9 +38,10 @@ public class DCWorld {
 		createDcHeroes(ctx);
 		createSomeBattle();
 	}
-	
-	
+
 	public void createDcHeroes(final ApplicationContext ctx) {
+//		logger.debug(messageSource.getMessage("battle.start.message", new Object[] {}, english));
+		
 		TheGreenArrow arrow = ctx.getBean("theGreenArrow", TheGreenArrow.class);
 		Superman superman = ctx.getBean("superman", Superman.class);
 		Batman batman = ctx.getBean("batman", Batman.class);
@@ -40,7 +52,7 @@ public class DCWorld {
 		Batmobil batmobil = ctx.getBean("batmobil", Batmobil.class);
 		LexLutor lexLutor = ctx.getBean("lexLutor", LexLutor.class);
 		Zoom zoom = ctx.getBean("zoom", Zoom.class);
-		
+
 		logger.debug("------------------");
 		logger.debug(arrow.toString());
 		logger.debug(superman.toString());
@@ -52,25 +64,24 @@ public class DCWorld {
 		logger.debug(batmobil.toString());
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
-		
-		
+
+
 		FightingOpponentPair supermanAgainstBatman = ctx.getBean("supermanAgainstBatman", FightingOpponentPair.class);
-		FightingOpponentPair supermanAgainstLexLutor = ctx.getBean("supermanAgainstLexLutor", FightingOpponentPair.class);
-		FightingOpponentPair theGreenArrowAgainstZoom = ctx.getBean("theGreenArrowAgainstZoom", FightingOpponentPair.class);
-		
-		
-		// The following row cause IllegalArgumentException, because two "GoodGuy" can't fight against each other
-//		Battle battle1 = ctx.getBean("battle1", Battle.class);
+		FightingOpponentPair supermanAgainstLexLutor = ctx.getBean("supermanAgainstLexLutor",
+				FightingOpponentPair.class);
+		FightingOpponentPair theGreenArrowAgainstZoom = ctx.getBean("theGreenArrowAgainstZoom",
+				FightingOpponentPair.class);
+
+		// The following row cause IllegalArgumentException, because two
+		// "GoodGuy" can't fight against each other
+		// Battle battle1 = ctx.getBean("battle1", Battle.class);
 		Battle battle2 = ctx.getBean("battle2", Battle.class);
 		Battle battle3 = ctx.getBean("battle3", Battle.class);
 
-		
-		
-	}
-	
-	private void createSomeBattle() {
-		
 	}
 
-	
+	private void createSomeBattle() {
+
+	}
+
 }

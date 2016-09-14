@@ -6,7 +6,7 @@ public abstract class DCHero {
 
 	protected String name;
 
-	protected double lifePower;
+	protected int lifePower;
 
 	protected int ability;
 
@@ -16,11 +16,11 @@ public abstract class DCHero {
 		this.name = name;
 	}
 
-	public void setLifePower(double lifePower) {
+	public void setLifePower(int lifePower) {
 		this.lifePower = lifePower;
 	}
 
-	public double getLifePower() {
+	public int getLifePower() {
 		return lifePower;
 	}
 
@@ -44,4 +44,11 @@ public abstract class DCHero {
 		return ability;
 	}
 
+	public int decreaseLifePowery(final int decrease) {
+		this.lifePower -= decrease;
+		if(this.lifePower < 1)
+			this.lifePower = 1;
+		return (int) this.lifePower;
+	}
+	
 }

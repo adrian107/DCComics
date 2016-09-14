@@ -9,4 +9,6 @@ public interface WinnerOfFightingStrategy {
 	
 	public int generateWinnerOfOneRoundByAbility(FightingOpponentPair fightingOpponentPair);
 	
+	public void decreaseLifePowerOfLoserDcHero(DCHero dcHero);
+	
 }

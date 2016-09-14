@@ -8,10 +8,24 @@
 
 	<context:annotation-config />
 
-	<bean id="dcWorld" class="com.epam.dccomics.domain.DCWorld" ></bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>messages</value>
+		</property>
+	</bean>
+
+
+	<bean id="locale" class="java.util.Locale" >
+		<constructor-arg name="baseLocale" value="en"></constructor-arg>
+		<constructor-arg name="localeExtensions" value="EN"></constructor-arg>
+	</bean>
+	
+
+	<bean id="dcWorld" class="com.epam.dccomics.domain.DCWorld"></bean>
 
 	<import resource="beans_dc_heroes.xml" />
-	
+
 	<import resource="beans_dc_battles.xml" />
 
 </beans>

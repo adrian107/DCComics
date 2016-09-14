@@ -39,7 +39,7 @@ public class Battle {
 	}
 
 	private void startFighting(FightingOpponentPair fightingOpponentPair) {
-		logger.debug("Start fighting " + fightingOpponentPair.getGoodGuyDcHero().getName() + " against " + fightingOpponentPair.getBadGuyDcHero().getName());
+//		logger.debug("Start fighting " + fightingOpponentPair.getGoodGuyDcHero().getName() + " against " + fightingOpponentPair.getBadGuyDcHero().getName());
 		
 //		for (int i = 0; i < numberOfFightingRounds; i++) {
 //			int num = winnerOfOneRoundStrategy.generateWinnerByAbility(fightingOpponentPair);
