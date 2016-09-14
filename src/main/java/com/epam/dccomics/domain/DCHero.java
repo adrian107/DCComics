@@ -46,9 +46,15 @@ public abstract class DCHero {
 
 	public int decreaseLifePowery(final int decrease) {
 		this.lifePower -= decrease;
-		if(this.lifePower < 1)
-			this.lifePower = 1;
+		if(this.lifePower < 0)
+			this.lifePower = 0;
 		return (int) this.lifePower;
 	}
 	
+	public int increaseLifePowery(final int increase) {
+		this.lifePower += increase;
+		if(this.lifePower > 100)
+			this.lifePower = 100;
+		return (int) this.lifePower;
+	}
 }

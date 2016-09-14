@@ -6,49 +6,44 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd"
 	default-lazy-init="true">
 
-	<!-- ****************************************** -->
-	<!-- CREATE Heroes START -->
+	<context:annotation-config />
+
+	
 
 	<bean id="theGreenArrow" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getArrowInstance">
-		<constructor-arg value="TheGreenArrow"></constructor-arg>
+		<constructor-arg value="${dchero.theGreenArrow.name}"></constructor-arg>
 	</bean>
 
 	<bean id="superman" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getSupermanInstance">
-		<constructor-arg value="Superman"></constructor-arg>
+		<constructor-arg value="${dchero.superman.name}"></constructor-arg>
 	</bean>
 
 	<bean id="batman" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getBatmanInstance">
-		<constructor-arg value="Batman"></constructor-arg>
+		<constructor-arg value="${dchero.batman.name}"></constructor-arg>
 		<property name="batmobil" ref="batmobil"></property>
 	</bean>
 
 	<bean id="lexLutor" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getLexLutorInstance">
-		<constructor-arg value="LexLutor"></constructor-arg>
+		<constructor-arg value="${dchero.lexLutor.name}"></constructor-arg>
 		<property name="limousine" ref="limousine1"></property>
 	</bean>
 
 	<bean id="zoom" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getZoomInstance">
-		<constructor-arg value="Zoom"></constructor-arg>
+		<constructor-arg value="${dchero.zoom.name}"></constructor-arg>
 	</bean>
 
 	<bean id="prototypeDCHero" class="com.epam.dccomics.domain.PrototypeDCHero"
 		scope="prototype">
-		<constructor-arg name="name" value="PrototypeDCHero"></constructor-arg>
+		<constructor-arg name="name" value="${dchero.prototypeDCHero.name}"></constructor-arg>
 		<property name="goodGuy"
 			value="#{ T(com.epam.dccomics.domain.GoodGuy).BAD_GUY }"></property>
 	</bean>
 
-	<!-- CREATE Heroes end -->
-	<!-- ****************************************** -->
-
-
-	<!-- ****************************************** -->
-	<!-- CREATE Weapons and Vehicles START -->
 
 	<bean id="batmobilGun" class="com.epam.dccomics.domain.Gun">
 		<constructor-arg name="name" value="batmobilGun1"></constructor-arg>
@@ -63,6 +58,5 @@
 		<constructor-arg name="name" value="limousine1"></constructor-arg>
 	</bean>
 
-	<!-- CREATE Weapons and Vehicles END -->
-	<!-- ****************************************** -->
+
 </beans>

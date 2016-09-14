@@ -11,4 +11,7 @@ public interface WinnerOfFightingStrategy {
 	
 	public void decreaseLifePowerOfLoserDcHero(DCHero dcHero);
 	
+	public void increaseLifePowerOfLoserDcHero(DCHero dcHero);	
+	
+	
 }

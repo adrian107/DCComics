@@ -41,5 +41,13 @@ public class FightingOpponentPair {
 	public void setCounterOfBadGuyDcHero(int counterOfBadGuyDcHero) {
 		this.counterOfBadGuyDcHero = counterOfBadGuyDcHero;
 	}
+	
+	public void setBadGuyDcHero(DCHero badGuyDcHero) {
+		this.badGuyDcHero = badGuyDcHero;
+	}
+	
+	public void setGoodGuyDcHero(DCHero goodGuyDcHero) {
+		this.goodGuyDcHero = goodGuyDcHero;
+	}
 
 }

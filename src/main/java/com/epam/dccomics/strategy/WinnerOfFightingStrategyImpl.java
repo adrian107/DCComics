@@ -1,8 +1,10 @@
 package com.epam.dccomics.strategy;
 
-import java.rmi.activation.UnknownObjectException;
+import java.rmi.activation.UnknownObjectException; 
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import com.epam.dccomics.constant.Constant;
 import com.epam.dccomics.domain.DCHero;
@@ -16,9 +18,11 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 
 	private static Logger logger = (Logger) LoggerFactory.getLogger(WinnerOfFightingStrategyImpl.class);
 
+	
+
 	@Override
 	public int startFighting(FightingOpponentPair fightingOpponentPair) {
-		logger.debug("-------------------------------------------------------");
+		logger.debug("-------------------------------------------------------------------------------------------------------------------");
 		logger.debug("Start fighting " + fightingOpponentPair.getGoodGuyDcHero().getName() + " against "
 				+ fightingOpponentPair.getBadGuyDcHero().getName());
 		explanationText(fightingOpponentPair);
@@ -50,8 +54,13 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 	}
 
 	private int generateRandomNumberOfRounds() {
-		int min = 1;
-		int max = 5;
+//		environment.getClass();
+//		System.out.println(environment.getProperty("dccomics.fights.min-round-number"));
+//		
+//		int min = Integer.parseInt(environment.getProperty("dccomics.fights.min-round-number"));
+//		int max = Integer.parseInt(environment.getProperty("dccomics.fights.max-round-number"));
+		int min = 3;
+		int max = 8;
 		return (int) (Math.random() * max) + min;
 	}
 
@@ -66,12 +75,14 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 					fightingOpponentPair.getGoodGuyDcHero().getName(), goodGuyAbility,
 					fightingOpponentPair.getBadGuyDcHero().getName(), badGuyAbility,
 					fightingOpponentPair.getGoodGuyDcHero().getName() + " won", actualFightingResult);
+			increaseLifePowerOfLoserDcHero(fightingOpponentPair.getGoodGuyDcHero());
 			decreaseLifePowerOfLoserDcHero(fightingOpponentPair.getBadGuyDcHero());
 		} else {
 			fightingResult = String.format("%10s %30s -- %10s %-30s --> %12s, (result: %d)",
 					fightingOpponentPair.getGoodGuyDcHero().getName(), goodGuyAbility,
 					fightingOpponentPair.getBadGuyDcHero().getName(), badGuyAbility,
 					fightingOpponentPair.getBadGuyDcHero().getName() + " won", actualFightingResult);
+			increaseLifePowerOfLoserDcHero(fightingOpponentPair.getBadGuyDcHero());
 			decreaseLifePowerOfLoserDcHero(fightingOpponentPair.getGoodGuyDcHero());
 		}
 		return fightingResult;
@@ -95,5 +106,11 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 	public void decreaseLifePowerOfLoserDcHero(DCHero dcHero) {
 		int lp = dcHero.decreaseLifePowery(Constant.DECREASE_LIFE_POWER);
 	}
+	
+	@Override
+	public void increaseLifePowerOfLoserDcHero(DCHero dcHero) {
+		int lp = dcHero.increaseLifePowery(Constant.INCREASE_LIFE_POWER);
+	}
 
+	
 }

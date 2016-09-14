@@ -1,6 +1,7 @@
 package com.epam.dccomics.domain;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.epam.dccomics.TooWeakLifePowerException;
 import com.epam.dccomics.constant.Constant;
@@ -22,7 +23,13 @@ public class Battle {
 	public Battle(FightingOpponentPair fightingOpponentPair) {
 		super();
 		this.fightingOpponentPair = fightingOpponentPair;
-		this.winnerOfFightingStrategy = new WinnerOfFightingStrategyImpl();
+		fight();
+	}
+
+	public Battle(FightingOpponentPair fightingOpponentPair, WinnerOfFightingStrategy winnerOfFightingStrategy) {
+		super();
+		this.fightingOpponentPair = fightingOpponentPair;
+		this.winnerOfFightingStrategy = winnerOfFightingStrategy;
 		fight();
 	}
 
@@ -39,21 +46,17 @@ public class Battle {
 	}
 
 	private void startFighting(FightingOpponentPair fightingOpponentPair) {
-//		logger.debug("Start fighting " + fightingOpponentPair.getGoodGuyDcHero().getName() + " against " + fightingOpponentPair.getBadGuyDcHero().getName());
-		
-//		for (int i = 0; i < numberOfFightingRounds; i++) {
-//			int num = winnerOfOneRoundStrategy.generateWinnerByAbility(fightingOpponentPair);
-//			System.out.println(num);
-//		}
 		winnerOfFightingStrategy.startFighting(fightingOpponentPair);
 	}
-
-	
 
 	private void checkLifePowers(FightingOpponentPair fightingOpponentPair) throws TooWeakLifePowerException {
 		if (fightingOpponentPair.getGoodGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER
 				|| fightingOpponentPair.getBadGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER) {
 			throw new TooWeakLifePowerException("Can't fight, because one of the 'dc heroes' has weak life power...");
 		}
+	}
+
+	public void setWinnerOfFightingStrategy(WinnerOfFightingStrategy winnerOfFightingStrategy) {
+		this.winnerOfFightingStrategy = winnerOfFightingStrategy;
 	}
 }

@@ -5,6 +5,7 @@ public class Constant {
 	public static final int LIFE_POWER = 100;
 	public static final int TOO_WEAK_LIFE_POWER = 25;
 	public static final int DECREASE_LIFE_POWER = 20;
+	public static final int INCREASE_LIFE_POWER = 20;
 	
 	public static final int VEHICLE_DAMAGE = 100;
 	
