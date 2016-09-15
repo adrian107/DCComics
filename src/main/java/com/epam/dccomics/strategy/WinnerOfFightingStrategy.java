@@ -5,7 +5,7 @@ import com.epam.dccomics.domain.FightingOpponentPair;
 
 public interface WinnerOfFightingStrategy {
 
-	public int startFighting(FightingOpponentPair fightingOpponentPair);
+	public void startFighting(FightingOpponentPair fightingOpponentPair);
 	
 	public int generateWinnerOfOneRoundByAbility(FightingOpponentPair fightingOpponentPair);
 	

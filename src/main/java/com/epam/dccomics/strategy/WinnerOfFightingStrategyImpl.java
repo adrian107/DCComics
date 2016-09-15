@@ -21,7 +21,7 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 	
 
 	@Override
-	public int startFighting(FightingOpponentPair fightingOpponentPair) {
+	public void startFighting(FightingOpponentPair fightingOpponentPair) {
 		logger.debug("-------------------------------------------------------------------------------------------------------------------");
 		logger.debug("Start fighting " + fightingOpponentPair.getGoodGuyDcHero().getName() + " against "
 				+ fightingOpponentPair.getBadGuyDcHero().getName());
@@ -32,7 +32,6 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 			String fightingResult = processFightingResult(fightingOpponentPair, actualFightingResult);
 			logger.debug("\t{}. {}", i + 1, fightingResult);
 		}
-		return 0;
 	}
 
 	private void explanationText(FightingOpponentPair fightingOpponentPair) {
@@ -48,12 +47,13 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 
 	@Override
 	public int generateWinnerOfOneRoundByAbility(FightingOpponentPair fightingOpponentPair) {
+		int min = 1;
 		int sumOfAbilities = fightingOpponentPair.getGoodGuyDcHero().getAbility()
 				+ fightingOpponentPair.getBadGuyDcHero().getAbility();
-		return (int) (Math.random() * sumOfAbilities) + 1;
+		return (int) (Math.random() * (sumOfAbilities-min)) + min;
 	}
 
-	private int generateRandomNumberOfRounds() {
+	public int generateRandomNumberOfRounds() {
 //		environment.getClass();
 //		System.out.println(environment.getProperty("dccomics.fights.min-round-number"));
 //		
@@ -61,7 +61,7 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 //		int max = Integer.parseInt(environment.getProperty("dccomics.fights.max-round-number"));
 		int min = 3;
 		int max = 8;
-		return (int) (Math.random() * max) + min;
+		return (int) (Math.random() * (max-min)) + min;
 	}
 
 	private String processFightingResult(FightingOpponentPair fightingOpponentPair, int actualFightingResult) {
@@ -104,12 +104,12 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 
 	@Override
 	public void decreaseLifePowerOfLoserDcHero(DCHero dcHero) {
-		int lp = dcHero.decreaseLifePowery(Constant.DECREASE_LIFE_POWER);
+		int lp = dcHero.decreaseLifePower(Constant.DECREASE_LIFE_POWER);
 	}
 	
 	@Override
 	public void increaseLifePowerOfLoserDcHero(DCHero dcHero) {
-		int lp = dcHero.increaseLifePowery(Constant.INCREASE_LIFE_POWER);
+		int lp = dcHero.increaseLifePower(Constant.INCREASE_LIFE_POWER);
 	}
 
 	

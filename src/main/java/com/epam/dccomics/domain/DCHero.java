@@ -44,14 +44,14 @@ public abstract class DCHero {
 		return ability;
 	}
 
-	public int decreaseLifePowery(final int decrease) {
+	public int decreaseLifePower(final int decrease) {
 		this.lifePower -= decrease;
 		if(this.lifePower < 0)
 			this.lifePower = 0;
 		return (int) this.lifePower;
 	}
 	
-	public int increaseLifePowery(final int increase) {
+	public int increaseLifePower(final int increase) {
 		this.lifePower += increase;
 		if(this.lifePower > 100)
 			this.lifePower = 100;
