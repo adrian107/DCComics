@@ -95,7 +95,7 @@ public class WinnerOfFightingStrategyImplTest {
 		// GIVEN
 		DCHero dcHero = null;
 		// WHEN
-		winnerOfFightingStrategyImpl.increaseLifePowerOfLoserDcHero(dcHero);
+		winnerOfFightingStrategyImpl.increaseLifePowerOfWinnerDcHero(dcHero);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -122,7 +122,7 @@ public class WinnerOfFightingStrategyImplTest {
 	public void testIncreaseLifePowerOfLoserDcHero_ShouldCallAMethodOnce() {
 		// GIVEN
 		// WHEN
-		winnerOfFightingStrategyImpl.increaseLifePowerOfLoserDcHero(goodGuy);
+		winnerOfFightingStrategyImpl.increaseLifePowerOfWinnerDcHero(goodGuy);
 		// THEN
 		BDDMockito.verify(goodGuy, times(1)).increaseLifePower(Constant.DECREASE_LIFE_POWER);
 	}

@@ -81,39 +81,61 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 		return (int) (Math.random() * (max - min)) + min;
 	}
 
-	public String processFightingResult(FightingOpponentPair fightingOpponentPair, int actualFightingResult) {
+	public String processFightingResult(FightingOpponentPair fightingOpponentPair, int fightingResult) {
 		if (fightingOpponentPair == null) {
 			throw new IllegalArgumentException("Args shouldn't be null");
 		}
-		if (actualFightingResult < 1) {
+		if (fightingResult < 1) {
 			throw new IllegalArgumentException("Arg shouldn't less than 1");
 		}
+
+		int limitBetweenStrogerAndWeakerDcHero = weakerDcHero(fightingOpponentPair).getAbility();
+
+		DCHero winnerHero = null;
+		DCHero loserHero = null;
+		if (fightingResult > limitBetweenStrogerAndWeakerDcHero) {
+			winnerHero = fightingOpponentPair.getGoodGuyDcHero();
+			loserHero = fightingOpponentPair.getBadGuyDcHero();
+		} else {
+			winnerHero = fightingOpponentPair.getBadGuyDcHero();
+			loserHero = fightingOpponentPair.getGoodGuyDcHero();
+		}
+		refreshLifePowers(winnerHero, loserHero);
+
+		return createFormattedText(fightingResult, winnerHero, loserHero);
+	}
+
+	private String createFormattedText(int fightingResult, DCHero winnerHero, DCHero loserHero) {
+		final String winnerAbilityLifePowerText = createFormattedTextForResultExplaination(winnerHero);
+		final String loserAbilityLifePowerText = createFormattedTextForResultExplaination(loserHero);
+
+		String message = "";
+		message = createFormattedTextForResult(winnerHero, loserHero, fightingResult, winnerAbilityLifePowerText,
+				loserAbilityLifePowerText);
+
+		return message;
+	}
+
+	private void refreshLifePowers(DCHero winnerHero, DCHero loserHero) {
+		increaseLifePowerOfWinnerDcHero(winnerHero);
+		decreaseLifePowerOfLoserDcHero(loserHero);
+	}
+
+	/*
+	 this method build a formatted text to display in console
+	 e.g. Superman (képesség:10|életerö:100) -- LexLutor (képesség:7|életerö:100) LexLutor won, (result: 5) 
+	 */
+	private String createFormattedTextForResult(DCHero winnerDcHero, DCHero loserDcHero, int fightingResult,
+			final String winnerAbilityLifePowerText, final String loserAbilityLifePowerText) {
+		return String.format("%10s %30s -- %10s %-30s --> %12s, (result: %d)", winnerDcHero.getName(),
+				winnerAbilityLifePowerText, loserDcHero.getName(), loserAbilityLifePowerText,
+				winnerDcHero.getName() + " won", fightingResult);
+	}
+
+	private String createFormattedTextForResultExplaination(DCHero dcHero) {
 		String ability = messageSource.getMessage("dccomics.dchero.ability", null, locale);
 		String lifePower = messageSource.getMessage("dccomics.dchero.lifepower", null, locale);
-
-		final DCHero weakerDcHero = weakerDcHero(fightingOpponentPair);
-
-		final String goodGuyAbility = "(" + ability + ":" + fightingOpponentPair.getGoodGuyDcHero().getAbility() + "|"
-				+ lifePower + ":" + fightingOpponentPair.getGoodGuyDcHero().getLifePower() + ")";
-		final String badGuyAbility = "(" + ability + ":" + fightingOpponentPair.getBadGuyDcHero().getAbility() + "|"
-				+ lifePower + ":" + fightingOpponentPair.getBadGuyDcHero().getLifePower() + ")";
-		String fightingResult = "";
-		if (actualFightingResult > weakerDcHero.getAbility()) {
-			fightingResult = String.format("%10s %30s -- %10s %-30s --> %12s, (result: %d)",
-					fightingOpponentPair.getGoodGuyDcHero().getName(), goodGuyAbility,
-					fightingOpponentPair.getBadGuyDcHero().getName(), badGuyAbility,
-					fightingOpponentPair.getGoodGuyDcHero().getName() + " won", actualFightingResult);
-			increaseLifePowerOfLoserDcHero(fightingOpponentPair.getGoodGuyDcHero());
-			decreaseLifePowerOfLoserDcHero(fightingOpponentPair.getBadGuyDcHero());
-		} else {
-			fightingResult = String.format("%10s %30s -- %10s %-30s --> %12s, (result: %d)",
-					fightingOpponentPair.getGoodGuyDcHero().getName(), goodGuyAbility,
-					fightingOpponentPair.getBadGuyDcHero().getName(), badGuyAbility,
-					fightingOpponentPair.getBadGuyDcHero().getName() + " won", actualFightingResult);
-			increaseLifePowerOfLoserDcHero(fightingOpponentPair.getBadGuyDcHero());
-			decreaseLifePowerOfLoserDcHero(fightingOpponentPair.getGoodGuyDcHero());
-		}
-		return fightingResult;
+		return "(" + ability + ":" + dcHero.getAbility() + "|" + lifePower + ":" + dcHero.getLifePower() + ")";
 	}
 
 	private DCHero weakerDcHero(FightingOpponentPair fightingOpponentPair) {
@@ -139,7 +161,7 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 	}
 
 	@Override
-	public void increaseLifePowerOfLoserDcHero(DCHero dcHero) {
+	public void increaseLifePowerOfWinnerDcHero(DCHero dcHero) {
 		if (dcHero == null) {
 			throw new IllegalArgumentException("Argumentum shouldn't be null");
 		}
