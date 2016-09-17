@@ -1,6 +1,7 @@
 package com.epam.dccomics;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -26,13 +27,15 @@ public class App {
 
 	public static void main(String[] args) {
 
-//		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans_dc_world.xml");
-//		ctx.registerShutdownHook();
+		// ClassPathXmlApplicationContext ctx = new
+		// ClassPathXmlApplicationContext("beans_dc_world.xml");
+		// ctx.registerShutdownHook();
 		ConfigurableApplicationContext ctx = new AnnotationConfigApplicationContext(DcWorldConfiguration.class);
 		ctx.registerShutdownHook();
-				
+
 		DCWorld dcWorld = ctx.getBean("dcWorld", DCWorld.class);
 		dcWorld.dcWorld(ctx);
+
 	}
 
 }

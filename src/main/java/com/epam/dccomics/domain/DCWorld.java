@@ -1,68 +1,81 @@
 package com.epam.dccomics.domain;
 
-import java.applet.AppletContext; 
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import ch.qos.logback.classic.Logger;
 
-import org.springframework.core.env.Environment;
-
-import com.epam.dccomics.strategy.WinnerOfFightingStrategy;
-
-//@PropertySource("classpath:dccomics.properties")
 public class DCWorld {
 
 	private static Logger logger = (Logger) LoggerFactory.getLogger(DCWorld.class);
 
-	@Autowired
-	private MessageSource messageSource;
+	// @Autowired
+	// private MessageSource messageSource;
 
-	
-	private Locale english;
+	@Autowired 
+	private TheGreenArrow theGreenArrow;
+
+	@Autowired
+	private DCHero superman;
+
+	@Autowired
+	private Batman batman;
+
+	@Autowired
+	private PrototypeDCHero prototypeDCHero;
+
+	@Autowired
+	private PrototypeDCHero prototypeDCHero2;
+
+	@Autowired
+	private PrototypeDCHero prototypeDCHero3;
+
+	@Autowired
+	private Gun gun;
+
+	@Autowired
+	private Batmobil batmobil;
+
+	@Autowired
+	private LexLutor lexLutor;
+
+	@Autowired
+	private Zoom zoom;
 
 	// @Autowired
-	// private Locale locale;
+	// @Qualifier("battle1")
+	// private Battle battle1;
 
-	
-	
-	public DCWorld() {
-		english = Locale.ENGLISH;
-	}
+	@Autowired
+	@Qualifier("battle2")
+	private Battle battle2;
+
+	@Autowired
+	@Qualifier("battle3")
+	private Battle battle3;
+
+	@Autowired
+	@Qualifier("battle4")
+	private Battle battle4;
+
+	// public DCWorld() {
+	// english = Locale.ENGLISH;
+	// }
 
 	@PostConstruct
 	public void init() {
-		logger.debug("DC World created");
 		logger.debug("------------------");
-	}
-
-	public void dcWorld(final ApplicationContext ctx) {
-		createDcHeroes(ctx);
-	}
-
-	public void createDcHeroes(final ApplicationContext ctx) {
-//		logger.debug(messageSource.getMessage("battle.start.message", new Object[] {}, english));
-		
-		TheGreenArrow arrow = ctx.getBean("theGreenArrow", TheGreenArrow.class);
-		Superman superman = ctx.getBean("superman", Superman.class);
-		Batman batman = ctx.getBean("batman", Batman.class);
-		PrototypeDCHero prototypeDCHero = ctx.getBean("prototypeDCHero", PrototypeDCHero.class);
-		PrototypeDCHero prototypeDCHero2 = ctx.getBean("prototypeDCHero", PrototypeDCHero.class);
-		PrototypeDCHero prototypeDCHero3 = ctx.getBean("prototypeDCHero", PrototypeDCHero.class);
-		Gun gun = ctx.getBean("batmobilGun", Gun.class);
-		Batmobil batmobil = ctx.getBean("batmobil", Batmobil.class);
-		LexLutor lexLutor = ctx.getBean("lexLutor", LexLutor.class);
-		Zoom zoom = ctx.getBean("zoom", Zoom.class);
-
-		logger.debug("------------------");
-		logger.debug(arrow.toString());
+		logger.debug(theGreenArrow.toString());
 		logger.debug(superman.toString());
 		logger.debug(batman.toString());
 		logger.debug(prototypeDCHero.toString());
@@ -72,14 +85,58 @@ public class DCWorld {
 		logger.debug(batmobil.toString());
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
+	}
 
-		// The "battle1" row cause IllegalArgumentException, because two
-		// "GoodGuy" can't fight against each other
-		// Battle battle1 = ctx.getBean("battle1", Battle.class);
-		Battle battle2 = ctx.getBean("battle2", Battle.class);
-		Battle battle3 = ctx.getBean("battle3", Battle.class);
-		Battle battle4 = ctx.getBean("battle4", Battle.class);
+	public void dcWorld(final ApplicationContext ctx) {
+		createDcHeroes(ctx);
+	}
 
+	public void createDcHeroes(final ApplicationContext ctx) {
+		// logger.debug(messageSource.getMessage("battle.start.message", new
+		// Object[] {}, english));
+
+		
+
+	}
+
+	public void setArrow(TheGreenArrow arrow) {
+		this.theGreenArrow = arrow;
+	}
+
+	public void setSuperman(Superman superman) {
+		this.superman = superman;
+	}
+
+	public void setBatman(Batman batman) {
+		this.batman = batman;
+	}
+
+	public void setPrototypeDCHero(PrototypeDCHero prototypeDCHero) {
+		this.prototypeDCHero = prototypeDCHero;
+	}
+
+	public void setPrototypeDCHero2(PrototypeDCHero prototypeDCHero2) {
+		this.prototypeDCHero2 = prototypeDCHero2;
+	}
+
+	public void setPrototypeDCHero3(PrototypeDCHero prototypeDCHero3) {
+		this.prototypeDCHero3 = prototypeDCHero3;
+	}
+
+	public void setGun(Gun gun) {
+		this.gun = gun;
+	}
+
+	public void setBatmobil(Batmobil batmobil) {
+		this.batmobil = batmobil;
+	}
+
+	public void setLexLutor(LexLutor lexLutor) {
+		this.lexLutor = lexLutor;
+	}
+
+	public void setZoom(Zoom zoom) {
+		this.zoom = zoom;
 	}
 
 }

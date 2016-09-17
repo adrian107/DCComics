@@ -22,11 +22,7 @@ public class DcBattlesConfiguration {
 	@Scope("prototype")
 	public WinnerOfFightingStrategyImpl winnerOfFightingStrategy() {
 		WinnerOfFightingStrategyImpl winnerOfFightingStrategy = new WinnerOfFightingStrategyImpl();
-		
-		
-		
-		
-		
+
 		return winnerOfFightingStrategy;
 	}
 
@@ -59,29 +55,30 @@ public class DcBattlesConfiguration {
 	}
 
 	@Bean
-	@Lazy
 	public Battle battle1(@Qualifier("supermanAgainstBatman") FightingOpponentPair supermanAgainstBatman) {
 		Battle battle1 = new Battle(supermanAgainstBatman);
 		battle1.setWinnerOfFightingStrategy(winnerOfFightingStrategy());
 		return battle1;
 	}
-	
+
 	@Bean
-	public Battle battle2(@Qualifier("supermanAgainstLexLutor") FightingOpponentPair supermanAgainstLexLutor, @Qualifier("winnerOfFightingStrategy")  WinnerOfFightingStrategyImpl winnerOfFightingStrategy) {
+	public Battle battle2(@Qualifier("supermanAgainstLexLutor") FightingOpponentPair supermanAgainstLexLutor,
+			@Qualifier("winnerOfFightingStrategy") WinnerOfFightingStrategyImpl winnerOfFightingStrategy) {
 		Battle battle2 = new Battle(supermanAgainstLexLutor);
 		battle2.setWinnerOfFightingStrategy(winnerOfFightingStrategy);
 		return battle2;
 	}
-	
+
 	@Bean
 	public Battle battle3(@Qualifier("theGreenArrowAgainstZoom") FightingOpponentPair theGreenArrowAgainstZoom) {
 		Battle battle3 = new Battle(theGreenArrowAgainstZoom);
 		battle3.setWinnerOfFightingStrategy(winnerOfFightingStrategy());
 		return battle3;
 	}
-	
+
 	@Bean
-	public Battle battle4(@Qualifier("theGreenArrowAgainstLexLutor") FightingOpponentPair theGreenArrowAgainstLexLutor) {
+	public Battle battle4(
+			@Qualifier("theGreenArrowAgainstLexLutor") FightingOpponentPair theGreenArrowAgainstLexLutor) {
 		Battle battle4 = new Battle(theGreenArrowAgainstLexLutor);
 		battle4.setWinnerOfFightingStrategy(winnerOfFightingStrategy());
 		return battle4;

@@ -22,6 +22,7 @@ public class DcWorldConfiguration {
 	private Environment env;
 
 	@Bean
+	@Lazy(false)
 	public DCWorld dcWorld() {
 		return new DCWorld();
 	}
