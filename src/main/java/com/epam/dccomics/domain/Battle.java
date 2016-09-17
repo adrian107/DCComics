@@ -1,5 +1,7 @@
 package com.epam.dccomics.domain;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,13 +25,17 @@ public class Battle {
 	public Battle(FightingOpponentPair fightingOpponentPair) {
 		super();
 		this.fightingOpponentPair = fightingOpponentPair;
-		fight();
 	}
 
 	public Battle(FightingOpponentPair fightingOpponentPair, WinnerOfFightingStrategy winnerOfFightingStrategy) {
 		super();
 		this.fightingOpponentPair = fightingOpponentPair;
 		this.winnerOfFightingStrategy = winnerOfFightingStrategy;
+
+	}
+
+	@PostConstruct
+	public void init() {
 		fight();
 	}
 
@@ -42,7 +48,6 @@ public class Battle {
 		}
 		checkLifePowers(fightingOpponentPair);
 		startFighting(fightingOpponentPair);
-
 	}
 
 	private void startFighting(FightingOpponentPair fightingOpponentPair) {

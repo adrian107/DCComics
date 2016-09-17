@@ -31,6 +31,8 @@ public class DCWorld {
 	// @Autowired
 	// private Locale locale;
 
+	
+	
 	public DCWorld() {
 		english = Locale.ENGLISH;
 	}
@@ -41,7 +43,7 @@ public class DCWorld {
 		logger.debug("------------------");
 	}
 
-	public void dCWorld(final ApplicationContext ctx) {
+	public void dcWorld(final ApplicationContext ctx) {
 		createDcHeroes(ctx);
 	}
 
@@ -71,19 +73,6 @@ public class DCWorld {
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
 
-
-
-		
-		WinnerOfFightingStrategy winnerOfFightingStrategy = ctx.getBean("winnerOfFightingStrategy", WinnerOfFightingStrategy.class);	
-
-		FightingOpponentPair supermanAgainstBatman = ctx.getBean("supermanAgainstBatman", FightingOpponentPair.class);
-		FightingOpponentPair supermanAgainstLexLutor = ctx.getBean("supermanAgainstLexLutor",
-				FightingOpponentPair.class);
-		FightingOpponentPair theGreenArrowAgainstZoom = ctx.getBean("theGreenArrowAgainstZoom",
-				FightingOpponentPair.class);
-		FightingOpponentPair theGreenArrowAgainstLexLutor = ctx.getBean("theGreenArrowAgainstLexLutor",
-				FightingOpponentPair.class);
-
 		// The "battle1" row cause IllegalArgumentException, because two
 		// "GoodGuy" can't fight against each other
 		// Battle battle1 = ctx.getBean("battle1", Battle.class);
@@ -92,7 +81,5 @@ public class DCWorld {
 		Battle battle4 = ctx.getBean("battle4", Battle.class);
 
 	}
-
-
 
 }

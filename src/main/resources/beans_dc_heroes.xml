@@ -9,6 +9,7 @@
 	<context:annotation-config />
 
 	
+	<context:component-scan base-package="com.epam.dccomics" />
 
 	<bean id="theGreenArrow" class="com.epam.dccomics.factory.DCHeroFactory"
 		factory-method="getArrowInstance">

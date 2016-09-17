@@ -7,6 +7,12 @@
 	default-lazy-init="true">
 
 	<context:annotation-config />
+	
+
+	<context:component-scan base-package="com.epam.dccomics" />
+	
+	
+<!-- 	<bean id="env" class="org.springframework.core.env.Environment"></bean> -->
 
 	<bean id="winnerOfFightingStrategy" class="com.epam.dccomics.strategy.WinnerOfFightingStrategyImpl"
 		scope="prototype">
