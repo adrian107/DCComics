@@ -1,34 +1,45 @@
 package com.epam.dccomics.strategy;
 
-import org.slf4j.LoggerFactory; 
+import java.util.Locale;
+
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.context.MessageSource;
 
 import com.epam.dccomics.constant.Constant;
 import com.epam.dccomics.domain.DCHero;
 import com.epam.dccomics.domain.FightingOpponentPair;
+import com.epam.dccomics.propertywrappers.WinnerOfFightingStrategyWrapper;
 import com.google.common.annotations.VisibleForTesting;
 
 import ch.qos.logback.classic.Logger;
-
 
 public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 
 	private static Logger logger = (Logger) LoggerFactory.getLogger(WinnerOfFightingStrategyImpl.class);
 
-	
-	
+	@Autowired
+	private MessageSource messageSource;
+
+	@Autowired
+	private Locale locale;
+
+	private WinnerOfFightingStrategyWrapper winnerOfFightingStrategyWrapper;
+
+	public WinnerOfFightingStrategyImpl() {
+		winnerOfFightingStrategyWrapper = null;
+	}
+
+	public WinnerOfFightingStrategyImpl(WinnerOfFightingStrategyWrapper winnerOfFightingStrategyWrapper) {
+		this.winnerOfFightingStrategyWrapper = winnerOfFightingStrategyWrapper;
+	}
+
 	@Override
 	public void startFighting(FightingOpponentPair fightingOpponentPair) {
 		if (fightingOpponentPair == null) {
 			throw new IllegalArgumentException("Arg shouldn't be null");
 		}
-		logger.debug(
-				"-------------------------------------------------------------------------------------------------------------------");
-		logger.debug("Start fighting " + fightingOpponentPair.getGoodGuyDcHero().getName() + " against "
-				+ fightingOpponentPair.getBadGuyDcHero().getName());
+
 		explanationText(fightingOpponentPair);
 		int numberOfFightingRounds = generateRandomNumberOfRounds();
 		for (int i = 0; i < numberOfFightingRounds; i++) {
@@ -40,15 +51,20 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 
 	@VisibleForTesting
 	private void explanationText(FightingOpponentPair fightingOpponentPair) {
+		logger.debug(
+				"-------------------------------------------------------------------------------------------------------------------");
+		String message = messageSource.getMessage("dccomics.dchero.start-fight", new Object[] {
+				fightingOpponentPair.getGoodGuyDcHero().getName(), fightingOpponentPair.getBadGuyDcHero().getName() },
+				locale);
+		logger.debug(message);
 		DCHero weakerDcHero = weakerDcHero(fightingOpponentPair);
 		DCHero strongerDcHero = strongerDcHero(fightingOpponentPair);
 		String weakerRange = "1-" + weakerDcHero.getAbility();
 		String strongerRange = weakerDcHero.getAbility() + "-"
 				+ (weakerDcHero.getAbility() + strongerDcHero.getAbility());
-
-		String s1 = "if the result is between " + weakerRange + ", then " + weakerDcHero.getName();
-		String s2 = "else between " + strongerRange + ", then " + strongerDcHero.getName();
-		logger.debug("({}, {})", s1, s2);
+		message = messageSource.getMessage("dccomics.dchero.fight.explain-for-abilites",
+				new Object[] { weakerRange, weakerDcHero.getName(), strongerRange, strongerDcHero.getName() }, locale);
+		logger.debug(message);
 	}
 
 	@Override
@@ -60,16 +76,8 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 	}
 
 	public int generateRandomNumberOfRounds() {
-//		if(env == null) {
-//			System.out.println("asdasd");
-//		}
-//		System.out.println("*****" + env.getProperty("dccomics.fights.minroundnumber"));
-
-//		Integer.parseInt(env.getProperty("dccomics.fights.min-round-number"));
-//		Integer.parseInt(env.getProperty("dccomics.fights.max-round-number"));
-		
-		int min = 3;
-		int max = 8;
+		int min = winnerOfFightingStrategyWrapper.getMinRoundOfFights();
+		int max = winnerOfFightingStrategyWrapper.getMaxRoundOfFights();
 		return (int) (Math.random() * (max - min)) + min;
 	}
 
@@ -80,13 +88,15 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 		if (actualFightingResult < 1) {
 			throw new IllegalArgumentException("Arg shouldn't less than 1");
 		}
+		String ability = messageSource.getMessage("dccomics.dchero.ability", null, locale);
+		String lifePower = messageSource.getMessage("dccomics.dchero.lifepower", null, locale);
 
 		final DCHero weakerDcHero = weakerDcHero(fightingOpponentPair);
 
-		final String goodGuyAbility = "(ability:" + fightingOpponentPair.getGoodGuyDcHero().getAbility() + "|lifepower:"
-				+ fightingOpponentPair.getGoodGuyDcHero().getLifePower() + ")";
-		final String badGuyAbility = "(ability:" + fightingOpponentPair.getBadGuyDcHero().getAbility() + "|lifepower:"
-				+ fightingOpponentPair.getBadGuyDcHero().getLifePower() + ")";
+		final String goodGuyAbility = "(" + ability + ":" + fightingOpponentPair.getGoodGuyDcHero().getAbility() + "|"
+				+ lifePower + ":" + fightingOpponentPair.getGoodGuyDcHero().getLifePower() + ")";
+		final String badGuyAbility = "(" + ability + ":" + fightingOpponentPair.getBadGuyDcHero().getAbility() + "|"
+				+ lifePower + ":" + fightingOpponentPair.getBadGuyDcHero().getLifePower() + ")";
 		String fightingResult = "";
 		if (actualFightingResult > weakerDcHero.getAbility()) {
 			fightingResult = String.format("%10s %30s -- %10s %-30s --> %12s, (result: %d)",
@@ -135,6 +145,5 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 		}
 		dcHero.increaseLifePower(Constant.INCREASE_LIFE_POWER);
 	}
-
 
 }

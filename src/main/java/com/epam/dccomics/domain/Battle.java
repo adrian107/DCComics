@@ -57,7 +57,7 @@ public class Battle {
 	private void checkLifePowers(FightingOpponentPair fightingOpponentPair) throws TooWeakLifePowerException {
 		if (fightingOpponentPair.getGoodGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER
 				|| fightingOpponentPair.getBadGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER) {
-			throw new TooWeakLifePowerException("Can't fight, because one of the 'dc heroes' has weak life power...");
+			throw new TooWeakLifePowerException("Can't fight, because one of the 'dc heroes' has weak life power... Run again the program");
 		}
 	}
 

@@ -3,15 +3,12 @@ package com.epam.dccomics.domain;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.stereotype.Component;
 
 import ch.qos.logback.classic.Logger;
 
@@ -71,7 +68,17 @@ public class DCWorld {
 	// public DCWorld() {
 	// english = Locale.ENGLISH;
 	// }
-
+	
+	
+	@Autowired
+	Locale locale;
+	
+	@Autowired
+	private MessageSource messageSource;
+	
+//	@Autowired
+//	ApplicationContext ctx;
+	
 	@PostConstruct
 	public void init() {
 		logger.debug("------------------");
@@ -85,6 +92,7 @@ public class DCWorld {
 		logger.debug(batmobil.toString());
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
+		
 	}
 
 	public void dcWorld(final ApplicationContext ctx) {
@@ -95,7 +103,6 @@ public class DCWorld {
 		// logger.debug(messageSource.getMessage("battle.start.message", new
 		// Object[] {}, english));
 
-		
 
 	}
 

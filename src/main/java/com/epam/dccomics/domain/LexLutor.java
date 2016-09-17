@@ -1,9 +1,13 @@
 package com.epam.dccomics.domain;
 
+import java.util.Locale;
+
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 import com.epam.dccomics.constant.Constant;
 
@@ -13,6 +17,12 @@ public class LexLutor extends DCHero {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(LexLutor.class);
 
+	@Autowired
+	MessageSource messageSource;
+	
+	@Autowired
+	Locale locale; 
+	
 	private Limousine limousine;
 
 	public LexLutor(final String name) {
@@ -21,7 +31,8 @@ public class LexLutor extends DCHero {
 
 	@PostConstruct
 	public void init() {
-		logger.debug("{} is created", getName());
+		String message = messageSource.getMessage("dccomics.dchero.is-created", new Object[] {getName()}, locale);
+		logger.debug(message);
 	}
 
 	public Limousine getLimousine() {

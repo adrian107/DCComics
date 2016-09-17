@@ -1,9 +1,13 @@
 package com.epam.dccomics.domain;
 
+import java.util.Locale;
+
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 import com.epam.dccomics.constant.Constant;
 
@@ -13,13 +17,20 @@ public class Zoom extends DCHero {
 
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(Zoom.class);
 	
+	@Autowired
+	private MessageSource messageSource;
+
+	@Autowired
+	private Locale locale;
+	
 	public Zoom(String name) {
 		super(name);
 	}
 	
 	@PostConstruct
 	public void init() {
-		logger.debug("{} is created", getName());
+		String message = messageSource.getMessage("dccomics.dchero.is-created", new Object[] {getName()}, locale);
+		logger.debug(message);
 	}
 
 	@Override

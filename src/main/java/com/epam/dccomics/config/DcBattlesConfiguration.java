@@ -1,5 +1,6 @@
 package com.epam.dccomics.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,10 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.env.Environment;
 
 import com.epam.dccomics.domain.Battle;
 import com.epam.dccomics.domain.DCHero;
 import com.epam.dccomics.domain.FightingOpponentPair;
+import com.epam.dccomics.propertywrappers.WinnerOfFightingStrategyWrapper;
 import com.epam.dccomics.strategy.WinnerOfFightingStrategyImpl;
 
 @Configuration
@@ -18,11 +21,16 @@ import com.epam.dccomics.strategy.WinnerOfFightingStrategyImpl;
 @Import({ DcHeroesConfiguration.class })
 public class DcBattlesConfiguration {
 
+	@Autowired
+	private Environment env;
+
 	@Bean
 	@Scope("prototype")
 	public WinnerOfFightingStrategyImpl winnerOfFightingStrategy() {
-		WinnerOfFightingStrategyImpl winnerOfFightingStrategy = new WinnerOfFightingStrategyImpl();
-
+		int minRoundOfFights = Integer.parseInt(env.getProperty("dccomics.fights.min-round-number"));
+		int maxRoundOfFights = Integer.parseInt(env.getProperty("dccomics.fights.max-round-number"));
+		WinnerOfFightingStrategyWrapper winnerOfFightingStrategyWrapper = new WinnerOfFightingStrategyWrapper(minRoundOfFights, maxRoundOfFights);
+		WinnerOfFightingStrategyImpl winnerOfFightingStrategy = new WinnerOfFightingStrategyImpl(winnerOfFightingStrategyWrapper);
 		return winnerOfFightingStrategy;
 	}
 
