@@ -88,9 +88,7 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 		if (fightingResult < 1) {
 			throw new IllegalArgumentException("Arg shouldn't less than 1");
 		}
-
 		int limitBetweenStrogerAndWeakerDcHero = weakerDcHero(fightingOpponentPair).getAbility();
-
 		DCHero winnerHero = null;
 		DCHero loserHero = null;
 		if (fightingResult > limitBetweenStrogerAndWeakerDcHero) {
@@ -101,7 +99,6 @@ public class WinnerOfFightingStrategyImpl implements WinnerOfFightingStrategy {
 			loserHero = fightingOpponentPair.getGoodGuyDcHero();
 		}
 		refreshLifePowers(winnerHero, loserHero);
-
 		return createFormattedText(fightingResult, winnerHero, loserHero);
 	}
 

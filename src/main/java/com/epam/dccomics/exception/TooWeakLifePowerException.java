@@ -1,4 +1,4 @@
-package com.epam.dccomics;
+package com.epam.dccomics.exception;
 
 public class TooWeakLifePowerException extends RuntimeException {
 

@@ -5,8 +5,8 @@ import javax.annotation.PostConstruct;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.epam.dccomics.TooWeakLifePowerException;
 import com.epam.dccomics.constant.Constant;
+import com.epam.dccomics.exception.TooWeakLifePowerException;
 import com.epam.dccomics.strategy.WinnerOfFightingStrategy;
 import com.epam.dccomics.strategy.WinnerOfFightingStrategyImpl;
 
@@ -55,9 +55,13 @@ public class Battle {
 	}
 
 	private void checkLifePowers(FightingOpponentPair fightingOpponentPair) throws TooWeakLifePowerException {
-		if (fightingOpponentPair.getGoodGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER
-				|| fightingOpponentPair.getBadGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER) {
-			throw new TooWeakLifePowerException("Can't fight, because one of the 'dc heroes' has weak life power... Run again the program");
+		if (fightingOpponentPair.getGoodGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER) {
+			String message = "Can't fight, because the lifepower of '" + fightingOpponentPair.getGoodGuyDcHero().getName() + "' decreased to too weak... Run again the program";
+			throw new TooWeakLifePowerException(message);
+		}
+		else if(fightingOpponentPair.getBadGuyDcHero().getLifePower() < Constant.TOO_WEAK_LIFE_POWER){
+			String message = "Can't fight, because the lifepower of '" + fightingOpponentPair.getBadGuyDcHero().getName() + "' decreased to too weak... Run again the program";
+			throw new TooWeakLifePowerException(message);
 		}
 	}
 
