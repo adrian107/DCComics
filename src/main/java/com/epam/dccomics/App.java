@@ -34,7 +34,6 @@ public class App {
 		ctx.registerShutdownHook();
 
 		DCWorld dcWorld = ctx.getBean("dcWorld", DCWorld.class);
-		dcWorld.dcWorld(ctx);
 
 	}
 

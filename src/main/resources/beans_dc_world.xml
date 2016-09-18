@@ -10,20 +10,12 @@
 
 	<context:component-scan base-package="com.epam.dccomics" />
 
-
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename">
 			<value>messages</value>
 		</property>
 	</bean>
-
-	<!-- <bean id="dccomicsPropertySource" -->
-	<!-- class="org.springframework.context.support.ResourceBundleMessageSource"> -->
-	<!-- <property name="basename"> -->
-	<!-- <value>dccomics</value> -->
-	<!-- </property> -->
-	<!-- </bean> -->
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -33,18 +25,10 @@
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
 
-
-	<!-- <bean id="propertySources" -->
-	<!-- class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"> -->
-	<!-- <property name="properties" ref="dccomicsPropertySource" /> -->
-	<!-- </bean> -->
-
-
 	<bean id="locale" class="java.util.Locale">
 		<constructor-arg name="baseLocale" value="en"></constructor-arg>
 		<constructor-arg name="localeExtensions" value="EN"></constructor-arg>
 	</bean>
-
 
 	<bean id="dcWorld" class="com.epam.dccomics.domain.DCWorld"></bean>
 

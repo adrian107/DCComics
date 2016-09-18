@@ -7,7 +7,6 @@
 	default-lazy-init="true">
 
 	<context:annotation-config />
-
 	
 	<context:component-scan base-package="com.epam.dccomics" />
 
@@ -44,7 +43,6 @@
 		<property name="goodGuy"
 			value="#{ T(com.epam.dccomics.domain.GoodGuy).BAD_GUY }"></property>
 	</bean>
-
 
 	<bean id="batmobilGun" class="com.epam.dccomics.domain.Gun">
 		<constructor-arg name="name" value="batmobilGun1"></constructor-arg>

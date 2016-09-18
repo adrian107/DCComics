@@ -1,25 +1,16 @@
 package com.epam.dccomics.domain;
 
-import java.util.Locale;
-
 import javax.annotation.PostConstruct;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.MessageSource;
-
 import ch.qos.logback.classic.Logger;
 
 public class DCWorld {
 
 	private static Logger logger = (Logger) LoggerFactory.getLogger(DCWorld.class);
 
-	// @Autowired
-	// private MessageSource messageSource;
-
-	@Autowired 
+	@Autowired
 	private TheGreenArrow theGreenArrow;
 
 	@Autowired
@@ -49,9 +40,11 @@ public class DCWorld {
 	@Autowired
 	private Zoom zoom;
 
-	// @Autowired
-	// @Qualifier("battle1")
-	// private Battle battle1;
+	// this cause IllegalArgumentException exception, because two "GoodGuy"
+	// can't fight against each other
+	@Autowired
+	@Qualifier("battle1")
+	private Battle battle1;
 
 	@Autowired
 	@Qualifier("battle2")
@@ -65,20 +58,6 @@ public class DCWorld {
 	@Qualifier("battle4")
 	private Battle battle4;
 
-	// public DCWorld() {
-	// english = Locale.ENGLISH;
-	// }
-	
-	
-	@Autowired
-	Locale locale;
-	
-	@Autowired
-	private MessageSource messageSource;
-	
-//	@Autowired
-//	ApplicationContext ctx;
-	
 	@PostConstruct
 	public void init() {
 		logger.debug("------------------");
@@ -92,18 +71,6 @@ public class DCWorld {
 		logger.debug(batmobil.toString());
 		logger.debug(lexLutor.toString());
 		logger.debug(zoom.toString());
-		
-	}
-
-	public void dcWorld(final ApplicationContext ctx) {
-		createDcHeroes(ctx);
-	}
-
-	public void createDcHeroes(final ApplicationContext ctx) {
-		// logger.debug(messageSource.getMessage("battle.start.message", new
-		// Object[] {}, english));
-
-
 	}
 
 	public void setArrow(TheGreenArrow arrow) {
